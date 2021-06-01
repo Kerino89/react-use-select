@@ -1,5 +1,3 @@
-import { isObject } from "./is-object";
-
 /**
  * @param {Any} a
  * @param {Any} b
