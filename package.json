@@ -15,6 +15,8 @@
     "name": "Utkin Anton"
   },
   "scripts": {
+    "lint": "eslint ./src/**/*.ts",
+    "lint:fix": "eslint --fix ./src/**/*.ts",
     "test": "jest",
     "test:cov": "jest --coverage",
     "test:watch": "jest --watch",
@@ -35,6 +37,13 @@
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.8",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
     "jest": "^27.0.3",
     "lint-staged": "^11.0.0",
