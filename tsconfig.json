@@ -6,6 +6,7 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "jsx": "react",
     "strict": true,
+    "newLine": "lf",
     "rootDir": ".",
     "baseUrl": "./src/",
     "esModuleInterop": true,
