@@ -1,5 +1,4 @@
-jest.config.js
 node_modules
-internals
-scripts
+coverage
 dist
+!.*.js
