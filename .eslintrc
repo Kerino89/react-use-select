@@ -1,8 +1,10 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "jest"],
   "extends": [
     "eslint:recommended",
+    "plugin:jest/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
@@ -18,10 +20,14 @@
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "jest": {
+      "version": 26
     }
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "jest/globals": true
   },
   "rules": {
     "react/prop-types": "off",
