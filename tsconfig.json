@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "ES2015",
+    "moduleResolution": "Node",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "jsx": "react",
+    "strict": true,
+    "rootDir": ".",
+    "baseUrl": "./src/",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@hooks/*": ["hooks/*"],
+      "@helpers/*": ["helpers/*"]
+    }
+  },
+  "exclude": ["node_module", "build/**/*"]
+}
