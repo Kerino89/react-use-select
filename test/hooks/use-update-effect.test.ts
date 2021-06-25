@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks/dom";
+import { renderHook } from "@testing-library/react-hooks/dom/pure";
 import { useUpdateEffect } from "@hooks/use-update-effect";
 
 describe("Hooks", () => {
