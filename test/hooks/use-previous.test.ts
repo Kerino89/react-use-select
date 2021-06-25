@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react-hooks/dom";
 import { usePrevious } from "@hooks/use-previous";
 
 describe("Hooks", () => {
