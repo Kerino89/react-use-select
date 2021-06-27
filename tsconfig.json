@@ -8,15 +8,19 @@
     "strict": true,
     "newLine": "lf",
     "rootDir": ".",
+    "outDir": "./dist",
     "baseUrl": "./src/",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "sourceMap": true,
+    "declaration": true,
+    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@hooks/*": ["hooks/*"],
       "@helpers/*": ["helpers/*"]
     }
   },
-  "exclude": ["node_module", "build/**/*"]
+  "include": ["src"],
+  "exclude": ["node_module", "dist/**/*"]
 }
