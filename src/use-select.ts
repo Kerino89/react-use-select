@@ -9,7 +9,7 @@ import { UseSelectActionsTypes } from "./use-select.const";
 import { getGroupOptions, filterOptions, filterGroupOptions } from "./use-select.utils";
 import { selectReducer, INITIAL_STATE } from "./use-select.reduce";
 
-import type { RefObject, ChangeEvent } from "react";
+import type React from "react";
 import type {
   UseSelect,
   InputProps,
@@ -72,7 +72,7 @@ export const useSelect = ({
     dispatch({ type: UseSelectActionsTypes.CLOSE_MENU });
   }, []);
 
-  const handlerInputChange = useCallback(({ target }: ChangeEvent<HTMLInputElement>) => {
+  const handlerInputChange = useCallback(({ target }: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: UseSelectActionsTypes.SET_SEARCH_VALUE, value: target.value });
   }, []);
 
@@ -157,7 +157,7 @@ export const useSelect = ({
 
   const getSelectProps = useCallback(
     <E extends HTMLElement>(): SelectProps<E> => ({
-      ref: selectRef as RefObject<E>,
+      ref: selectRef as React.RefObject<E>,
       style: {},
     }),
     [],
@@ -173,7 +173,7 @@ export const useSelect = ({
 
   const getOptionsProps = useCallback(
     <E extends HTMLElement>(): OptionsProps<E> => ({
-      ref: optionsRef as RefObject<E>,
+      ref: optionsRef as React.RefObject<E>,
       onClick: inputFocus,
       style: {},
     }),

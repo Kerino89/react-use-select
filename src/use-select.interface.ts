@@ -1,17 +1,20 @@
 import { UseSelectActionsTypes } from "./use-select.const";
-import type { HTMLAttributes, InputHTMLAttributes, Key, RefObject } from "react";
+import type React from "react";
 
 export type SelectValue = string | number;
 export type PropGetter<P> = Partial<P> | Array<Partial<P>>;
-export type WithKeyedProps<P> = P & { key: Key };
-export type WithRefProps<P, E extends HTMLElement = HTMLElement> = P & { ref: RefObject<E> };
+export type WithKeyedProps<P> = P & { key: React.Key };
+export type WithRefProps<P, E extends HTMLElement = HTMLElement> = P & { ref: React.RefObject<E> };
 
-export type GroupProps<E extends HTMLElement> = WithKeyedProps<HTMLAttributes<E>>;
-export type InputProps = WithRefProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-export type OptionProps<E extends HTMLElement> = WithKeyedProps<HTMLAttributes<E>>;
-export type SelectProps<E extends HTMLElement> = WithRefProps<HTMLAttributes<E>, E>;
-export type ControlProps<E extends HTMLElement> = HTMLAttributes<E>;
-export type OptionsProps<E extends HTMLElement> = WithRefProps<HTMLAttributes<E>, E>;
+export type GroupProps<E extends HTMLElement> = WithKeyedProps<React.HTMLAttributes<E>>;
+export type InputProps = WithRefProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
+export type OptionProps<E extends HTMLElement> = WithKeyedProps<React.HTMLAttributes<E>>;
+export type SelectProps<E extends HTMLElement> = WithRefProps<React.HTMLAttributes<E>, E>;
+export type ControlProps<E extends HTMLElement> = React.HTMLAttributes<E>;
+export type OptionsProps<E extends HTMLElement> = WithRefProps<React.HTMLAttributes<E>, E>;
 
 export type InputPropGetter = PropGetter<InputProps>;
 export type GroupPropGetter<E extends HTMLElement> = PropGetter<GroupProps<E>>;
@@ -93,8 +96,8 @@ export interface UseSelectProps {
 
 export interface UseSelect {
   state: UseSelectState;
-  selectRef: RefObject<HTMLElement>;
-  optionsRef: RefObject<HTMLElement>;
+  selectRef: React.RefObject<HTMLElement>;
+  optionsRef: React.RefObject<HTMLElement>;
   isGroup: boolean;
   groupOptions: Array<UseSelectGroupOption>;
   setSelected: (payload: Array<SelectOption>) => void;

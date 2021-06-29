@@ -23,6 +23,7 @@
   },
   "scripts": {
     "build": "rollup --config rollup.config.ts",
+    "dts": "dts-bundle-generator --no-banner --external-imports -o dist/index.d.ts src/index.ts ",
     "lint": "eslint ./src/**/*.ts",
     "lint:fix": "eslint --fix ./src/**/*.ts",
     "test": "jest",
