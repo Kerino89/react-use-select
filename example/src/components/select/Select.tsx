@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useSelect, UseSelectProps } from "../../../..";
+import { useSelect, UseSelectProps } from "react-hook-select";
 
 import { Button } from "./styles/Button";
 import { Value } from "./styles/Value";
