@@ -1,3 +1,4 @@
+import external from "rollup-plugin-peer-deps-external";
 import typescript from "@rollup/plugin-typescript";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
@@ -23,11 +24,17 @@ const rollupOptions = {
     {
       sourcemap: IS_DEV,
       file: pkg.module,
-      format: "es",
+      format: "esm",
       name: pkg.name,
     },
   ],
-  plugins: [json(), typescript({ sourceMap: IS_DEV }), resolve(), commonjs({ extensions })],
+  plugins: [
+    json(),
+    external(),
+    typescript({ sourceMap: IS_DEV }),
+    resolve(),
+    commonjs({ extensions }),
+  ],
 };
 
 export default rollupOptions;

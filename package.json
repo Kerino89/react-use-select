@@ -22,8 +22,8 @@
     "name": "Utkin Anton"
   },
   "scripts": {
-    "build": "rollup --config rollup.config.ts",
-    "dts": "dts-bundle-generator --no-banner --external-imports -o dist/index.d.ts src/index.ts ",
+    "build": "rollup --config rollup.config.ts && dts-bundle-generator --no-banner -o dist/index.d.ts src/index.ts",
+    "dts": "dts-bundle-generator --no-banner -o dist/index.d.ts src/index.ts",
     "lint": "eslint ./src/**/*.ts",
     "lint:fix": "eslint --fix ./src/**/*.ts",
     "test": "jest",
@@ -74,6 +74,7 @@
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
     "rollup": "^2.52.3",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "ts-jest": "^27.0.3",
     "tslib": "^1.14.1",
     "typescript": "^4.3.4"
