@@ -24,6 +24,7 @@
   "scripts": {
     "build": "rollup --config rollup.config.ts && dts-bundle-generator --no-banner -o dist/index.d.ts src/index.ts",
     "dts": "dts-bundle-generator --no-banner -o dist/index.d.ts src/index.ts",
+    "start:example": "npm run build && npm link && npm --prefix ./example link react-hook-select && npm --prefix ./example run dev",
     "lint": "eslint ./src/**/*.ts",
     "lint:fix": "eslint --fix ./src/**/*.ts",
     "test": "jest",
