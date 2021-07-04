@@ -13,7 +13,7 @@
     "esModuleInterop": true,
     "skipLibCheck": false,
     "sourceMap": true,
-    "declaration": true,
+    "declaration": false,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
@@ -21,6 +21,5 @@
       "@helpers/*": ["helpers/*"]
     }
   },
-  "include": ["src"],
   "exclude": ["node_module", "dist/**/*"]
 }
