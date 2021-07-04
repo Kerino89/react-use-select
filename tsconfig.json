@@ -21,5 +21,5 @@
       "@helpers/*": ["helpers/*"]
     }
   },
-  "exclude": ["node_module", "dist/**/*"]
+  "exclude": ["node_module/**/*", "example/**/*", "dist/**/*"]
 }
