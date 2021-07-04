@@ -113,10 +113,13 @@ export const useSelect = ({
         return {
           ...option,
           isActive,
+          isDisabled: option.isDisabled ?? false,
           getOptionProps() {
             return {
               key: `select-option-${i}`,
               onClick() {
+                if (option.isDisabled) return void 0;
+
                 if (isMulti) {
                   const payload = { label: option.label, value: option.value };
 

@@ -62,6 +62,7 @@ interface ClearSearchValueAction {
 export interface SelectOption {
   readonly label: string | number;
   readonly value: SelectValue;
+  readonly isDisabled?: boolean;
 }
 
 export interface UseSelectGroupOption extends SelectGroupOption {
