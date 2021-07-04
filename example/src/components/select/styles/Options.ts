@@ -8,6 +8,7 @@ export const Options = styled.div`
   width: 100%;
   max-height: 200px;
   padding: 0;
+  border-radius: 4px;
   border: 1px solid #141414;
   background: #2f363d;
   box-shadow: 0 0 0 rgba(255, 255, 255, 0.15);
