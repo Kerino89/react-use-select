@@ -60,8 +60,8 @@ interface ClearSearchValueAction {
 }
 
 export interface SelectOption {
-  label: string | number;
-  value: SelectValue;
+  readonly label: string | number;
+  readonly value: SelectValue;
 }
 
 export interface UseSelectGroupOption extends SelectGroupOption {
@@ -70,8 +70,8 @@ export interface UseSelectGroupOption extends SelectGroupOption {
 }
 
 export interface SelectGroupOption {
-  label?: string | number;
-  options: Array<SelectOption>;
+  readonly label?: string | number;
+  readonly options: Array<SelectOption>;
 }
 
 export interface UseSelectOption extends SelectOption {
