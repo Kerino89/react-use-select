@@ -51,18 +51,14 @@ export const filterGroupOptions = (
   return newOptions;
 };
 
-export const getValue = (
-  option: SelectOption | Array<SelectOption>,
-): SelectValue | Array<SelectValue> => {
+export const getValue = (option: SelectOption | Array<SelectOption>): Array<SelectValue> => {
   if (Array.isArray(option)) return option.map(({ value }) => value);
 
-  return option.value;
+  return [option.value];
 };
 
-export const getLabel = (
-  option: SelectOption | Array<SelectOption>,
-): SelectValue | Array<SelectValue> => {
+export const getLabel = (option: SelectOption | Array<SelectOption>): Array<SelectValue> => {
   if (Array.isArray(option)) return option.map(({ label }) => label);
 
-  return option.label;
+  return [option.label];
 };
