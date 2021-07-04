@@ -188,6 +188,12 @@ export const useSelect = ({
 
   useEffect(inputFocus, [inputFocus]);
 
+  useEffect(() => {
+    if (isDisabled && state.isOpen) {
+      hideOptions();
+    }
+  }, [isDisabled, state.isOpen, hideOptions]);
+
   useUpdateEffect(() => {
     const newValue = Array.isArray(value) ? value : [value];
 
