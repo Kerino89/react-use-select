@@ -89,6 +89,7 @@ export interface UseSelectProps {
   isMulti?: boolean;
   onceClickOption?: boolean;
   isSearchable?: boolean;
+  isDisabled?: boolean;
   value?: SelectOption | Array<SelectOption>;
   options?: Array<SelectOption | SelectGroupOption>;
   onChange?: (value: SelectOption | Array<SelectOption>) => void;

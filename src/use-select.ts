@@ -24,11 +24,12 @@ import type {
 } from "./use-select.interface";
 
 export const useSelect = ({
-  isMulti = false,
   value,
+  options,
+  isMulti = false,
   isSearchable = false,
   onceClickOption = false,
-  options,
+  isDisabled = false,
   onChange,
 }: UseSelectProps): UseSelect => {
   const [state, dispatch] = useReducer(selectReducer, INITIAL_STATE);
@@ -65,8 +66,10 @@ export const useSelect = ({
   }, []);
 
   const showOptions = useCallback(() => {
+    if (isDisabled) return void 0;
+
     dispatch({ type: UseSelectActionsTypes.OPEN_MENU });
-  }, []);
+  }, [isDisabled]);
 
   const hideOptions = useCallback(() => {
     dispatch({ type: UseSelectActionsTypes.CLOSE_MENU });
