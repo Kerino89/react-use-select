@@ -1,6 +1,7 @@
 import * as React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { Select } from "./components/select";
+import { BaseSelect } from "./pages/base-select";
 
 export function App(): JSX.Element {
   const options = React.useMemo(
@@ -11,8 +12,10 @@ export function App(): JSX.Element {
   console.log(options);
 
   return (
-    <div>
-      <Select options={options} />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/base-select" component={BaseSelect} />
+      </Switch>
+    </BrowserRouter>
   );
 }
