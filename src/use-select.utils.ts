@@ -21,11 +21,11 @@ export const flatOptions = (
 export const getGroupOptions = (
   options: Array<SelectOption | SelectGroupOption>,
 ): Array<SelectGroupOption> => {
-  if (options.length && "value" in options[0]) {
-    return [{ options }] as Array<SelectGroupOption>;
+  if (options.length && "options" in options[0]) {
+    return options as Array<SelectGroupOption>;
   }
 
-  return options as Array<SelectGroupOption>;
+  return [{ options }] as Array<SelectGroupOption>;
 };
 
 export const filterOptions = (options: Array<SelectOption>, value: string): Array<SelectOption> => {
