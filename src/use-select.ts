@@ -113,7 +113,7 @@ export const useSelect = ({
           getOptionProps() {
             return {
               key: `select-option-${i}`,
-              onClick: () => {
+              onClick() {
                 if (isMulti) {
                   const payload = { label: option.label, value: option.value };
 
