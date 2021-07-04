@@ -7,6 +7,7 @@ export function getOptions(count = 10, cb?: (index: number) => SelectOption): Ar
       : {
           label: `Test ${i + 1}`,
           value: i,
+          isDisabled: Boolean(randomInt(0, 1)),
         },
   );
 }
@@ -17,6 +18,7 @@ export function getGroupOptions(count = 5): Array<SelectGroupOption> {
     options: getOptions(randomInt(1, 10), (idx) => ({
       label: `Test ${i + 1}-${idx + 1}`,
       value: `${i + 1}-${idx + 1}`,
+      isDisabled: Boolean(randomInt(0, 1)),
     })),
   }));
 }
