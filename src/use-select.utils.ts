@@ -1,5 +1,5 @@
 import { mergeProps } from "./helpers/merge-props";
-import { isFunction } from "@helpers/is-function";
+import { isFunction } from "@helpers/type-guards";
 
 import type {
   PropGetter,
