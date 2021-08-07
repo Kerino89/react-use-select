@@ -1,6 +1,8 @@
 import { mergeProps } from "./helpers/merge-props";
 import { isFunction } from "@helpers/type-guards";
 
+import type { HTMLAttributes } from "react";
+
 import type {
   PropGetter,
   SelectValue,
@@ -10,8 +12,8 @@ import type {
 } from "./use-select.interface";
 
 export const makePropGetter = <
-  P extends React.HTMLAttributes<HTMLElement>,
-  U extends PropGetter<React.HTMLAttributes<HTMLElement>>,
+  P extends HTMLAttributes<HTMLElement>,
+  U extends PropGetter<HTMLAttributes<HTMLElement>>,
 >(
   props: P,
   userProps?: U,

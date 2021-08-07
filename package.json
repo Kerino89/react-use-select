@@ -4,8 +4,17 @@
   "description": "",
   "main": "dist/react-hook-select.cjs.js",
   "module": "dist/react-hook-select.esm.js",
+  "umd:main": "dist/react-hook-select.umd.js",
+  "unpkg": "dist/react-hook-select.umd.js",
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/react-hook-select.esm.js",
+      "require": "./dist/react-hook-select.cjs.js"
+    }
+  },
   "sideEffects": true,
   "files": [
     "dist"
@@ -22,8 +31,7 @@
     "name": "Utkin Anton"
   },
   "scripts": {
-    "build": "rollup --config rollup.config.ts && npm run dts",
-    "dts": "dts-bundle-generator --no-banner -o dist/index.d.ts src/index.ts",
+    "build": "rollup --config rollup.config.js",
     "start:example": "npm run build && npm link && npm --prefix ./example link react-hook-select && npm --prefix ./example run dev",
     "lint": "eslint ./src/**/*.ts",
     "lint:fix": "eslint --fix ./src/**/*.ts",
@@ -48,7 +56,6 @@
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
-    "@rollup/plugin-typescript": "^8.2.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/react-hooks": "^7.0.1",
@@ -60,7 +67,6 @@
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
     "del": "^6.0.0",
-    "dts-bundle-generator": "^5.9.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^24.4.0",
@@ -76,7 +82,10 @@
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
     "rollup": "^2.55.1",
+    "rollup-plugin-flat-dts": "^1.2.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-typescript2": "^0.30.0",
     "ts-jest": "^27.0.4",
     "tslib": "^2.3.0",
     "typescript": "^4.3.5"

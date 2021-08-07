@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "module": "ES2015",
+    "module": "ESNext",
     "moduleResolution": "Node",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "jsx": "react",
@@ -9,12 +9,12 @@
     "newLine": "lf",
     "rootDir": ".",
     "outDir": "./dist",
-    "baseUrl": "./src/",
+    "baseUrl": "./src",
     "esModuleInterop": true,
     "skipLibCheck": false,
     "sourceMap": true,
     "declaration": false,
-    "resolveJsonModule": true,
+    "resolveJsonModule": false,
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@hooks/*": ["hooks/*"],
