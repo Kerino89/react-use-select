@@ -1,10 +1,11 @@
 import external from "rollup-plugin-peer-deps-external";
 import typescript from "rollup-plugin-typescript2";
 import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
 import sourcemaps from "rollup-plugin-sourcemaps";
-import json from "@rollup/plugin-json";
+import commonjs from "@rollup/plugin-commonjs";
+import { terser } from "rollup-plugin-terser";
 import flatDts from "rollup-plugin-flat-dts";
+import json from "@rollup/plugin-json";
 import ts from "typescript";
 import del from "del";
 
@@ -46,5 +47,13 @@ export default outputs.map((output) => ({
     resolve(),
     sourcemaps(),
     output.format === "umd" && commonjs({ include: /\/node_modules\//, extensions }),
+    output.format !== "esm" &&
+      terser({
+        output: { comments: false },
+        compress: {
+          drop_console: true,
+        },
+      }),
+    ,
   ].filter(Boolean),
 }));
