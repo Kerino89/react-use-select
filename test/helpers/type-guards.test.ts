@@ -1,6 +1,6 @@
 import { isObject, isEmpty } from "@helpers/type-guards";
 
-describe("Helpers [type-guards]", () => {
+describe("Helpers: type-guards", () => {
   describe("isObject", () => {
     it("checking the array", () => {
       expect(isObject([])).toBeFalsy();
