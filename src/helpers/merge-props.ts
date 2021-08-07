@@ -1,8 +1,6 @@
 export type MergeSpread<T extends ReadonlyArray<unknown>> = T extends [infer L, ...infer R]
-  ? Pick<L, Exclude<keyof L, keyof MergeSpread<R>>> & MergeSpread<R> extends infer O
-    ? { [K in keyof O]: O[K] }
-    : never
-  : never;
+  ? L & MergeSpread<R>
+  : unknown;
 
 export const mergeProps = <T extends ReadonlyArray<React.HTMLAttributes<HTMLElement>>>(
   ...props: T
