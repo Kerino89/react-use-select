@@ -6,10 +6,9 @@ export type SelectValue = string | number;
 export type PropGetter<P> = Partial<P> | ReadonlyArray<Partial<P>> | ((props: P) => Partial<P>);
 export type WithKeyedProps<P> = P & { key?: React.Key };
 export type WithRefProps<P, E extends HTMLElement = HTMLElement> = P & { ref?: React.Ref<E> };
-export type MergePropGetter<P extends unknown, U extends PropGetter<unknown>> = MergeSpread<
+export type MergePropGetter<P extends object, U extends PropGetter<object>> = MergeSpread<
   [P, U extends ReadonlyArray<unknown> ? MergeSpread<U> : U extends (props: P) => infer T ? T : U]
 >;
-
 export type GroupProps<E extends HTMLElement> = WithKeyedProps<React.HTMLAttributes<E>>;
 export type InputProps = WithRefProps<
   React.InputHTMLAttributes<HTMLInputElement>,

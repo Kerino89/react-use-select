@@ -14,17 +14,17 @@ export const makePropGetter = <
   U extends PropGetter<React.HTMLAttributes<HTMLElement>>,
 >(
   props: P,
-  userProps: U = {} as U,
+  userProps?: U,
 ): MergePropGetter<P, U> => {
   if (isFunction(userProps)) {
-    return makePropGetter({} as P, userProps(props));
+    return makePropGetter(userProps(props)) as MergePropGetter<P, U>;
   }
 
   if (Array.isArray(userProps)) {
-    return mergeProps(props, ...userProps);
+    return mergeProps(props, ...userProps) as MergePropGetter<P, U>;
   }
 
-  return mergeProps(props, userProps as React.HTMLAttributes<HTMLElement>);
+  return mergeProps(props, userProps as Record<string, unknown>) as MergePropGetter<P, U>;
 };
 
 export const flatOptions = (
