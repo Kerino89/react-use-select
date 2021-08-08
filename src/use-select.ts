@@ -30,7 +30,6 @@ import type {
   InputPropGetter,
   SelectPropGetter,
   UseSelectProps,
-  UseSelectOption,
   SelectGroupOption,
   UseSelectGroupOption,
 } from "./use-select.interface";
@@ -50,7 +49,6 @@ export const useSelect = ({
   const selectRef = useRef<HTMLElement>(null);
   const optionsRef = useRef<HTMLElement>(null);
 
-  const prevState = usePrevious(state);
   const prevValue = usePrevious(value);
 
   const isGroup = useMemo<boolean>(() => {
