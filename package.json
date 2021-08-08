@@ -30,6 +30,10 @@
     "email": "kerino89@gmail.com",
     "name": "Utkin Anton"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kerino89/react-hook-select"
+  },
   "scripts": {
     "build": "rollup --config rollup.config.js",
     "start:example": "npm run build && npm link && npm --prefix ./example link react-hook-select && npm --prefix ./example run dev",
@@ -50,7 +54,7 @@
     ]
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": ">=16"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
