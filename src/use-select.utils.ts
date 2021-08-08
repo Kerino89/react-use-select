@@ -16,10 +16,10 @@ export const makePropGetter = <
   U extends PropGetter<HTMLAttributes<HTMLElement>>,
 >(
   props: P,
-  userProps?: U,
+  userProps: U = {} as U,
 ): MergePropGetter<P, U> => {
   if (isFunction(userProps)) {
-    return makePropGetter(userProps(props)) as MergePropGetter<P, U>;
+    return makePropGetter({}, userProps(props)) as MergePropGetter<P, U>;
   }
 
   if (Array.isArray(userProps)) {
