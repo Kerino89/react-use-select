@@ -1,8 +1,10 @@
+import { HTMLAttributes } from "react";
+
 export type MergeSpread<T extends ReadonlyArray<unknown>> = T extends [infer L, ...infer R]
   ? L & MergeSpread<R>
   : unknown;
 
-export const mergeProps = <T extends ReadonlyArray<React.HTMLAttributes<HTMLElement>>>(
+export const mergeProps = <T extends ReadonlyArray<HTMLAttributes<HTMLElement>>>(
   ...props: T
 ): MergeSpread<T> => {
   if (props.length === 1) {
