@@ -7,7 +7,7 @@ export function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/base-select" component={BaseSelect} />
+        <Route path="/" component={BaseSelect} />
       </Switch>
     </BrowserRouter>
   );
