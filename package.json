@@ -1,7 +1,7 @@
 {
   "name": "react-hook-select",
   "version": "0.0.0",
-  "description": "",
+  "description": "React hook to create the select component.",
   "main": "dist/react-hook-select.cjs.js",
   "module": "dist/react-hook-select.esm.js",
   "umd:main": "dist/react-hook-select.umd.js",
