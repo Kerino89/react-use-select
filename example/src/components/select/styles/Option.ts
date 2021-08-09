@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import type { UseSelectOption } from "react-hook-select";
+import type { UseSelectOption } from "react-use-select";
 
 export const Option = styled.div<Pick<UseSelectOption, "isActive" | "isDisabled">>(
   ({ isActive = false, isDisabled }) => css`

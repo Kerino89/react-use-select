@@ -1,4 +1,4 @@
-import type { SelectOption, SelectGroupOption } from "react-hook-select";
+import type { SelectOption, SelectGroupOption } from "react-use-select";
 
 export function getOptions(count = 10, cb?: (index: number) => SelectOption): Array<SelectOption> {
   return Array.from({ length: count }, (_, i) =>

@@ -2,8 +2,8 @@
 
 ## Install
 
-    npm install react-hook-select
+    npm install react-use-select
 
 or
 
-    yarn add react-hook-select
+    yarn add react-use-select

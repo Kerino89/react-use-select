@@ -1,18 +1,18 @@
 {
-  "name": "react-hook-select",
+  "name": "react-use-select",
   "version": "0.0.0-development",
   "description": "React hook to create the select component.",
-  "main": "dist/react-hook-select.cjs.js",
-  "module": "dist/react-hook-select.esm.js",
-  "umd:main": "dist/react-hook-select.umd.js",
-  "unpkg": "dist/react-hook-select.umd.js",
+  "main": "dist/react-use-select.cjs.js",
+  "module": "dist/react-use-select.esm.js",
+  "umd:main": "dist/react-use-select.umd.js",
+  "unpkg": "dist/react-use-select.umd.js",
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/react-hook-select.esm.js",
-      "require": "./dist/react-hook-select.cjs.js"
+      "import": "./dist/react-use-select.esm.js",
+      "require": "./dist/react-use-select.cjs.js"
     }
   },
   "sideEffects": true,
@@ -32,11 +32,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kerino89/react-hook-select"
+    "url": "https://github.com/Kerino89/react-use-select"
   },
   "scripts": {
     "build": "rollup --config rollup.config.js",
-    "start:example": "npm run build && npm link && npm --prefix ./example link react-hook-select && npm --prefix ./example run dev",
+    "start:example": "npm run build && npm link && npm --prefix ./example link react-use-select && npm --prefix ./example run dev",
     "lint": "eslint ./src/**/*.ts",
     "lint:fix": "eslint --fix ./src/**/*.ts",
     "test": "jest",
