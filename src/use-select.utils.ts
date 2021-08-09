@@ -1,4 +1,33 @@
-import type { SelectOption, SelectGroupOption, SelectValue } from "./use-select.interface";
+import { mergeProps } from "./helpers/merge-props";
+import { isFunction } from "@helpers/type-guards";
+
+import type { HTMLAttributes } from "react";
+
+import type {
+  PropGetter,
+  SelectValue,
+  SelectOption,
+  MergePropGetter,
+  SelectGroupOption,
+} from "./use-select.interface";
+
+export const makePropGetter = <
+  P extends HTMLAttributes<HTMLElement>,
+  U extends PropGetter<HTMLAttributes<HTMLElement>>,
+>(
+  props: P,
+  userProps: U = {} as U,
+): MergePropGetter<P, U> => {
+  if (isFunction(userProps)) {
+    return makePropGetter({}, userProps(props)) as MergePropGetter<P, U>;
+  }
+
+  if (Array.isArray(userProps)) {
+    return mergeProps(props, ...userProps) as MergePropGetter<P, U>;
+  }
+
+  return mergeProps(props, userProps as Record<string, unknown>) as MergePropGetter<P, U>;
+};
 
 export const flatOptions = (
   options: Array<SelectOption | SelectGroupOption>,
@@ -21,11 +50,11 @@ export const flatOptions = (
 export const getGroupOptions = (
   options: Array<SelectOption | SelectGroupOption>,
 ): Array<SelectGroupOption> => {
-  if (options.length && "value" in options[0]) {
-    return [{ options }] as Array<SelectGroupOption>;
+  if (options.length && "options" in options[0]) {
+    return options as Array<SelectGroupOption>;
   }
 
-  return options as Array<SelectGroupOption>;
+  return [{ options }] as Array<SelectGroupOption>;
 };
 
 export const filterOptions = (options: Array<SelectOption>, value: string): Array<SelectOption> => {
@@ -51,18 +80,14 @@ export const filterGroupOptions = (
   return newOptions;
 };
 
-export const getValue = (
-  option: SelectOption | Array<SelectOption>,
-): SelectValue | Array<SelectValue> => {
+export const getValues = (option: SelectOption | Array<SelectOption>): Array<SelectValue> => {
   if (Array.isArray(option)) return option.map(({ value }) => value);
 
-  return option.value;
+  return [option.value];
 };
 
-export const getLabel = (
-  option: SelectOption | Array<SelectOption>,
-): SelectValue | Array<SelectValue> => {
+export const getLabels = (option: SelectOption | Array<SelectOption>): Array<SelectValue> => {
   if (Array.isArray(option)) return option.map(({ label }) => label);
 
-  return option.label;
+  return [option.label];
 };

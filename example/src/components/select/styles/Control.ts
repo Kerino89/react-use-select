@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Button } from "./Button";
 
 export const Control = styled.div`
-  height: 30px;
+  height: 40px;
   padding: 5px 10px;
   display: flex;
   width: 100%;

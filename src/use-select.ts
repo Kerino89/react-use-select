@@ -3,32 +3,44 @@ import { useOnClickOutside } from "@hooks/use-on-click-outside";
 import { useUpdateEffect } from "@hooks/use-update-effect";
 import { usePrevious } from "@hooks/use-previous";
 import { isEqual } from "@helpers/is-equal";
-import { isEmpty } from "@helpers/is-empty";
-import { isUndefined } from "@helpers/is-undefined";
+import { isEmpty, isUndefined, isFunction } from "@helpers/type-guards";
 import { UseSelectActionsTypes } from "./use-select.const";
-import { getGroupOptions, filterOptions, filterGroupOptions } from "./use-select.utils";
-import { selectReducer, INITIAL_STATE } from "./use-select.reduce";
+import {
+  getGroupOptions,
+  filterOptions,
+  filterGroupOptions,
+  makePropGetter,
+} from "./use-select.utils";
+import { selectReducer, INITIAL_STATE } from "./use-select.reducer";
 
-import type React from "react";
+import type { RefObject, ChangeEvent } from "react";
 import type {
   UseSelect,
   InputProps,
   SelectProps,
   OptionsProps,
+  GroupProps,
+  GroupPropGetter,
+  OptionProps,
+  OptionPropGetter,
+  OptionsPropGetter,
+  ControlPropGetter,
   ControlProps,
   SelectOption,
+  InputPropGetter,
+  SelectPropGetter,
   UseSelectProps,
-  UseSelectOption,
   SelectGroupOption,
   UseSelectGroupOption,
 } from "./use-select.interface";
 
 export const useSelect = ({
-  isMulti = false,
   value,
+  options,
+  isMulti = false,
   isSearchable = false,
   onceClickOption = false,
-  options,
+  isDisabled = false,
   onChange,
 }: UseSelectProps): UseSelect => {
   const [state, dispatch] = useReducer(selectReducer, INITIAL_STATE);
@@ -37,7 +49,6 @@ export const useSelect = ({
   const selectRef = useRef<HTMLElement>(null);
   const optionsRef = useRef<HTMLElement>(null);
 
-  const prevState = usePrevious(state);
   const prevValue = usePrevious(value);
 
   const isGroup = useMemo<boolean>(() => {
@@ -65,14 +76,16 @@ export const useSelect = ({
   }, []);
 
   const showOptions = useCallback(() => {
+    if (isDisabled) return void 0;
+
     dispatch({ type: UseSelectActionsTypes.OPEN_MENU });
-  }, []);
+  }, [isDisabled]);
 
   const hideOptions = useCallback(() => {
     dispatch({ type: UseSelectActionsTypes.CLOSE_MENU });
   }, []);
 
-  const handlerInputChange = useCallback(({ target }: React.ChangeEvent<HTMLInputElement>) => {
+  const handlerInputChange = useCallback(({ target }: ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: UseSelectActionsTypes.SET_SEARCH_VALUE, value: target.value });
   }, []);
 
@@ -99,10 +112,13 @@ export const useSelect = ({
 
     return getGroupOptions(filteredOptions || options).map((group, i) => ({
       ...group,
-      getGroupProps() {
-        return {
-          key: `select-group-${i}`,
-        };
+      getGroupProps<E extends HTMLElement>(props?: GroupPropGetter<E>) {
+        return makePropGetter<GroupProps<E>, GroupPropGetter<E>>(
+          {
+            key: `select-group-${i}`,
+          },
+          props,
+        );
       },
       options: group.options.map((option, i) => {
         const isActive = state.selected.some(({ value }) => value === option.value);
@@ -110,26 +126,32 @@ export const useSelect = ({
         return {
           ...option,
           isActive,
-          getOptionProps() {
-            return {
-              key: `select-option-${i}`,
-              onClick: () => {
-                if (isMulti) {
-                  const payload = { label: option.label, value: option.value };
+          isDisabled: option.isDisabled ?? false,
+          getOptionProps<E extends HTMLElement>(props?: OptionPropGetter<E>) {
+            return makePropGetter<OptionProps<E>, OptionPropGetter<E>>(
+              {
+                key: `select-option-${i}`,
+                onClick() {
+                  if (option.isDisabled) return void 0;
 
-                  if (!isActive) {
-                    addSelected(payload);
+                  if (isMulti) {
+                    const payload = { label: option.label, value: option.value };
+
+                    if (!isActive) {
+                      addSelected(payload);
+                    } else {
+                      removeSelected(payload);
+                    }
+
+                    if (onceClickOption) hideOptions();
                   } else {
-                    removeSelected(payload);
+                    setSelected([{ label: option.label, value: option.value }]);
+                    hideOptions();
                   }
-
-                  if (onceClickOption) hideOptions();
-                } else {
-                  setSelected([{ label: option.label, value: option.value }]);
-                  hideOptions();
-                }
+                },
               },
-            };
+              props,
+            );
           },
         };
       }),
@@ -147,45 +169,68 @@ export const useSelect = ({
   ]);
 
   const getInputProps = useCallback(
-    (): InputProps => ({
-      ref: inputRef,
-      value: state.searchValue,
-      onChange: handlerInputChange,
-    }),
+    (props?: InputPropGetter) => {
+      return makePropGetter<InputProps, InputPropGetter>(
+        {
+          ref: inputRef,
+          value: state.searchValue,
+          onChange: handlerInputChange,
+        },
+        props,
+      );
+    },
     [handlerInputChange, state.searchValue],
   );
 
-  const getSelectProps = useCallback(
-    <E extends HTMLElement>(): SelectProps<E> => ({
-      ref: selectRef as React.RefObject<E>,
-      style: {},
-    }),
-    [],
-  );
+  const getSelectProps = useCallback(<E extends HTMLElement>(props?: SelectPropGetter<E>) => {
+    return makePropGetter<SelectProps<E>, SelectPropGetter<E>>(
+      {
+        ref: selectRef as RefObject<E>,
+        style: {},
+      },
+      props,
+    );
+  }, []);
 
   const getControlProps = useCallback(
-    <E extends HTMLElement>(): ControlProps<E> => ({
-      onClick: toggleOptions,
-      style: {},
-    }),
+    <E extends HTMLElement>(props?: ControlPropGetter<E>) => {
+      return makePropGetter<ControlProps<E>, ControlPropGetter<E>>(
+        {
+          onClick: toggleOptions,
+          style: {},
+        },
+        props,
+      );
+    },
     [toggleOptions],
   );
 
   const getOptionsProps = useCallback(
-    <E extends HTMLElement>(): OptionsProps<E> => ({
-      ref: optionsRef as React.RefObject<E>,
-      onClick: inputFocus,
-      style: {},
-    }),
+    <E extends HTMLElement>(props?: OptionsPropGetter<E>) => {
+      return makePropGetter<OptionsProps<E>, OptionsPropGetter<E>>(
+        {
+          ref: optionsRef as RefObject<E>,
+          onClick: inputFocus,
+          style: {},
+        },
+        props,
+      );
+    },
     [inputFocus],
   );
 
   useEffect(inputFocus, [inputFocus]);
 
+  useEffect(() => {
+    if (isDisabled && state.isOpen) {
+      hideOptions();
+    }
+  }, [isDisabled, state.isOpen, hideOptions]);
+
   useUpdateEffect(() => {
     const newValue = Array.isArray(value) ? value : [value];
 
-    if (typeof onChange === "function" && !isEqual(state.selected, newValue)) {
+    if (isFunction(onChange) && !isEqual(state.selected, newValue)) {
       onChange(isMulti ? [...state.selected] : state.selected[0]);
     }
   }, [state.selected, onChange]);

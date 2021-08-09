@@ -1,18 +1,14 @@
 import * as React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { Select } from "./components/select";
+import { BaseSelect } from "./pages/base-select";
 
 export function App(): JSX.Element {
-  const options = React.useMemo(
-    () => Array.from({ length: 10 }, (_, i) => ({ label: `Test-${i}`, value: i })),
-    [],
-  );
-
-  console.log(options);
-
   return (
-    <div>
-      <Select options={options} />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" component={BaseSelect} />
+      </Switch>
+    </BrowserRouter>
   );
 }

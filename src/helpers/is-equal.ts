@@ -1,8 +1,3 @@
-/**
- * @param {Any} a
- * @param {Any} b
- * @returns {Boolean}
- */
 export const isEqual = (a: any, b: any): boolean => {
   if (a === b) return true;
 

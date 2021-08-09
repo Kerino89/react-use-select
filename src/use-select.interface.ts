@@ -1,20 +1,20 @@
 import { UseSelectActionsTypes } from "./use-select.const";
-import type React from "react";
+import type { MergeSpread } from "./helpers/merge-props";
+import type { Ref, Key, RefObject, HTMLAttributes, InputHTMLAttributes } from "react";
 
-export type SelectValue = string | number;
-export type PropGetter<P> = Partial<P> | Array<Partial<P>>;
-export type WithKeyedProps<P> = P & { key: React.Key };
-export type WithRefProps<P, E extends HTMLElement = HTMLElement> = P & { ref: React.RefObject<E> };
-
-export type GroupProps<E extends HTMLElement> = WithKeyedProps<React.HTMLAttributes<E>>;
-export type InputProps = WithRefProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
+export type MergePropGetter<P extends object, U extends PropGetter<object>> = MergeSpread<
+  [P, U extends ReadonlyArray<unknown> ? MergeSpread<U> : U extends (props: P) => infer T ? T : U]
 >;
-export type OptionProps<E extends HTMLElement> = WithKeyedProps<React.HTMLAttributes<E>>;
-export type SelectProps<E extends HTMLElement> = WithRefProps<React.HTMLAttributes<E>, E>;
-export type ControlProps<E extends HTMLElement> = React.HTMLAttributes<E>;
-export type OptionsProps<E extends HTMLElement> = WithRefProps<React.HTMLAttributes<E>, E>;
+export type SelectValue = string | number;
+export type PropGetter<P> = Partial<P> | ReadonlyArray<Partial<P>> | ((props: P) => Partial<P>);
+export type WithKeyedProps<P> = P & { key?: Key };
+export type WithRefProps<P, E extends HTMLElement = HTMLElement> = P & { ref?: Ref<E> };
+export type GroupProps<E extends HTMLElement> = WithKeyedProps<HTMLAttributes<E>>;
+export type InputProps = WithRefProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+export type OptionProps<E extends HTMLElement> = WithKeyedProps<HTMLAttributes<E>>;
+export type SelectProps<E extends HTMLElement> = WithRefProps<HTMLAttributes<E>, E>;
+export type ControlProps<E extends HTMLElement> = HTMLAttributes<E>;
+export type OptionsProps<E extends HTMLElement> = WithRefProps<HTMLAttributes<E>, E>;
 
 export type InputPropGetter = PropGetter<InputProps>;
 export type GroupPropGetter<E extends HTMLElement> = PropGetter<GroupProps<E>>;
@@ -60,18 +60,19 @@ interface ClearSearchValueAction {
 }
 
 export interface SelectOption {
-  label: string | number;
-  value: SelectValue;
+  readonly label: string | number;
+  readonly value: SelectValue;
+  readonly isDisabled?: boolean;
+}
+
+export interface SelectGroupOption {
+  readonly label?: string | number;
+  readonly options: Array<SelectOption>;
 }
 
 export interface UseSelectGroupOption extends SelectGroupOption {
   options: Array<UseSelectOption>;
   getGroupProps: <E extends HTMLElement>(props?: GroupPropGetter<E>) => GroupProps<E>;
-}
-
-export interface SelectGroupOption {
-  label?: string | number;
-  options: Array<SelectOption>;
 }
 
 export interface UseSelectOption extends SelectOption {
@@ -89,6 +90,7 @@ export interface UseSelectProps {
   isMulti?: boolean;
   onceClickOption?: boolean;
   isSearchable?: boolean;
+  isDisabled?: boolean;
   value?: SelectOption | Array<SelectOption>;
   options?: Array<SelectOption | SelectGroupOption>;
   onChange?: (value: SelectOption | Array<SelectOption>) => void;
@@ -96,8 +98,8 @@ export interface UseSelectProps {
 
 export interface UseSelect {
   state: UseSelectState;
-  selectRef: React.RefObject<HTMLElement>;
-  optionsRef: React.RefObject<HTMLElement>;
+  selectRef: RefObject<HTMLElement>;
+  optionsRef: RefObject<HTMLElement>;
   isGroup: boolean;
   groupOptions: Array<UseSelectGroupOption>;
   setSelected: (payload: Array<SelectOption>) => void;

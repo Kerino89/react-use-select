@@ -52,7 +52,12 @@ export const Select = (props: UseSelectProps): JSX.Element => {
                   const { key, ...restProps } = option.getOptionProps();
 
                   return (
-                    <Option {...restProps} isActive={option.isActive} key={key}>
+                    <Option
+                      {...restProps}
+                      isActive={option.isActive}
+                      isDisabled={option.isDisabled}
+                      key={key}
+                    >
                       {option.label}
                     </Option>
                   );

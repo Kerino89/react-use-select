@@ -21,6 +21,7 @@ export const selectReducer = (
     case UseSelectActionsTypes.CLOSE_MENU:
       return {
         ...state,
+        searchValue: "",
         isOpen: false,
       };
 

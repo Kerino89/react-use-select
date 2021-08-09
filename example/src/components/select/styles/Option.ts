@@ -2,13 +2,14 @@ import styled, { css } from "styled-components";
 
 import type { UseSelectOption } from "react-hook-select";
 
-export const Option = styled.div<Pick<UseSelectOption, "isActive">>(
-  ({ isActive = false }) => css`
+export const Option = styled.div<Pick<UseSelectOption, "isActive" | "isDisabled">>(
+  ({ isActive = false, isDisabled }) => css`
     position: relative;
     width: 100%;
     padding: 5px 10px;
     background: transparent;
     cursor: pointer;
+    opacity: ${isDisabled ? 0.5 : 1};
 
     &:hover {
       background: #1d2125;
