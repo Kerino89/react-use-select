@@ -1,6 +1,7 @@
 {
   "name": "react-use-select",
   "version": "0.0.0-development",
+  "license": "MIT",
   "description": "React hook to create the select component.",
   "main": "dist/react-use-select.cjs.js",
   "module": "dist/react-use-select.esm.js",
