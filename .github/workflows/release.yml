@@ -1,19 +1,19 @@
 name: Release
 on:
   push:
-    branches:
-      - 1.x
-      - main
-      - beta
+    branches: ["1.x", "main", "beta"]
+  pull_request:
+    branches: ["1.x", "main", "beta"]
 
 jobs:
   test:
-    name: "Node ${{ matrix.node-version }}"
-    runs-on: ubuntu-latest
+    name: "OS ${{ matrix.os }} Node ${{ matrix.node-version }}"
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v2
@@ -39,10 +39,11 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - name: Install dependencies
         run: npm ci
+      - name: Build
+        run: npm run build --if-present
       - name: Release
         env:
           CI: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run semantic-release

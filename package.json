@@ -1,6 +1,6 @@
 {
   "name": "react-use-select",
-  "version": "0.0.0-development",
+  "version": "0.0.0-semantically-released",
   "license": "MIT",
   "description": "React hook to create the select component.",
   "main": "dist/react-use-select.cjs.js",
@@ -36,6 +36,7 @@
     "url": "https://github.com/Kerino89/react-use-select"
   },
   "scripts": {
+    "prebuild": "rimraf dist",
     "build": "rollup --config rollup.config.js",
     "start:example": "npm run build && npm link && npm --prefix ./example link react-use-select && npm --prefix ./example run dev",
     "lint": "eslint ./src/**/*.ts",
@@ -47,24 +48,6 @@
     "prepare": "husky install",
     "commit": "cz",
     "semantic-release": "semantic-release"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix"
-    ],
-    "*.{md,mdx,json,css,scss,yaml,yml}": [
-      "prettier --write"
-    ]
-  },
-  "release": {
-    "branches": [
-      "1.x",
-      "main",
-      {
-        "name": "beta",
-        "prerelease": true
-      }
-    ]
   },
   "config": {
     "commitizen": {
