@@ -56,6 +56,16 @@
       "prettier --write"
     ]
   },
+  "release": {
+    "branches": [
+      "1.x",
+      "main",
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ]
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
