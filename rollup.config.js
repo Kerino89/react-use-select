@@ -4,7 +4,6 @@ import resolve from "@rollup/plugin-node-resolve";
 import sourcemaps from "rollup-plugin-sourcemaps";
 import commonjs from "@rollup/plugin-commonjs";
 import { terser } from "rollup-plugin-terser";
-import flatDts from "rollup-plugin-flat-dts";
 import json from "@rollup/plugin-json";
 import ts from "typescript";
 import del from "del";
@@ -29,7 +28,6 @@ const outputs = [
   {
     file: pkg.unpkg,
     format: "umd",
-    plugins: [flatDts({ tsconfig: "tsconfig.lib.json" })],
   },
 ];
 
@@ -42,6 +40,11 @@ export default outputs.map((output) => ({
     typescript({
       typescript: ts,
       tsconfig: "tsconfig.lib.json",
+      tsconfigOverride: {
+        compilerOptions: {
+          declaration: output.format === "esm",
+        },
+      },
       clean: true,
     }),
     resolve(),
