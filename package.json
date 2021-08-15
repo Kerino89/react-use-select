@@ -45,6 +45,7 @@
     "test:watch": "jest --watch",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
     "prepare": "husky install",
+    "commit": "cz",
     "semantic-release": "semantic-release"
   },
   "lint-staged": {
@@ -54,6 +55,11 @@
     "*.{md,mdx,json,css,scss,yaml,yml}": [
       "prettier --write"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "peerDependencies": {
     "react": ">=16"
@@ -72,6 +78,7 @@
     "@types/rollup-plugin-peer-deps-external": "^2.2.1",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
+    "cz-conventional-changelog": "^3.3.0",
     "del": "^6.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -93,9 +100,9 @@
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
+    "semantic-release": "^17.4.4",
     "ts-jest": "^27.0.4",
     "tslib": "^2.3.0",
-    "typescript": "^4.3.5",
-    "semantic-release": "^17.4.4"
+    "typescript": "^4.3.5"
   }
 }
