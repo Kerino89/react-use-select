@@ -5,6 +5,7 @@ import type { HTMLAttributes } from "react";
 
 import type {
   PropGetter,
+  SelectLabel,
   SelectValue,
   SelectOption,
   MergePropGetter,
@@ -86,7 +87,7 @@ export const getValues = (option: SelectOption | Array<SelectOption>): Array<Sel
   return [option.value];
 };
 
-export const getLabels = (option: SelectOption | Array<SelectOption>): Array<SelectValue> => {
+export const getLabels = (option: SelectOption | Array<SelectOption>): Array<SelectLabel> => {
   if (Array.isArray(option)) return option.map(({ label }) => label);
 
   return [option.label];

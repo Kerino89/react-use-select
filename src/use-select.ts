@@ -186,7 +186,6 @@ export const useSelect = ({
     return makePropGetter<SelectProps<E>, SelectPropGetter<E>>(
       {
         ref: selectRef as RefObject<E>,
-        style: {},
       },
       props,
     );
@@ -197,7 +196,6 @@ export const useSelect = ({
       return makePropGetter<ControlProps<E>, ControlPropGetter<E>>(
         {
           onClick: toggleOptions,
-          style: {},
         },
         props,
       );
@@ -211,7 +209,6 @@ export const useSelect = ({
         {
           ref: optionsRef as RefObject<E>,
           onClick: inputFocus,
-          style: {},
         },
         props,
       );

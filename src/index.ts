@@ -3,6 +3,7 @@ export { flatOptions, getLabels, getValues } from "./use-select.utils";
 export {
   UseSelect,
   SelectValue,
+  SelectLabel,
   SelectOption,
   UseSelectState,
   UseSelectProps,

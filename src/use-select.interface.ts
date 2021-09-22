@@ -1,11 +1,12 @@
 import { UseSelectActionsTypes } from "./use-select.const";
 import type { MergeSpread } from "./helpers/merge-props";
-import type { Ref, Key, RefObject, HTMLAttributes, InputHTMLAttributes } from "react";
+import type { Ref, Key, RefObject, HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 
 export type MergePropGetter<P extends object, U extends PropGetter<object>> = MergeSpread<
   [P, U extends ReadonlyArray<unknown> ? MergeSpread<U> : U extends (props: P) => infer T ? T : U]
 >;
 export type SelectValue = string | number;
+export type SelectLabel = string | number | ReactNode;
 export type PropGetter<P> = Partial<P> | ReadonlyArray<Partial<P>> | ((props: P) => Partial<P>);
 export type WithKeyedProps<P> = P & { key?: Key };
 export type WithRefProps<P, E extends HTMLElement = HTMLElement> = P & { ref?: Ref<E> };
@@ -60,13 +61,13 @@ interface ClearSearchValueAction {
 }
 
 export interface SelectOption {
-  readonly label: string | number;
+  readonly label: SelectLabel;
   readonly value: SelectValue;
   readonly isDisabled?: boolean;
 }
 
 export interface SelectGroupOption {
-  readonly label?: string | number;
+  readonly label?: SelectLabel;
   readonly options: Array<SelectOption>;
 }
 
