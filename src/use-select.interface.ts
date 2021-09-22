@@ -104,6 +104,8 @@ export interface UseSelect {
   isGroup: boolean;
   groupOptions: Array<UseSelectGroupOption>;
   setSelected: (payload: Array<SelectOption>) => void;
+  addSelected: (payload: SelectOption) => void;
+  removeSelected: (payload: SelectOption) => void;
   hideOptions: () => void;
   showOptions: () => void;
   toggleOptions: () => void;

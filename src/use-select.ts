@@ -89,6 +89,14 @@ export const useSelect = ({
     dispatch({ type: UseSelectActionsTypes.SET_SEARCH_VALUE, value: target.value });
   }, []);
 
+  const handleChangeOrSetSelected = useCallback(
+    (selected: Array<SelectOption>) => {
+      if (isFunction(onChange)) onChange(selected);
+      else setSelected(selected);
+    },
+    [onChange, setSelected],
+  );
+
   const toggleOptions = useCallback(() => {
     if (state.isOpen) {
       hideOptions();
@@ -134,18 +142,20 @@ export const useSelect = ({
                 onClick() {
                   if (option.isDisabled) return void 0;
 
-                  if (isMulti) {
-                    const payload = { label: option.label, value: option.value };
+                  const payload = { label: option.label, value: option.value };
 
+                  if (isMulti) {
                     if (!isActive) {
-                      addSelected(payload);
+                      handleChangeOrSetSelected([...state.selected, payload]);
                     } else {
-                      removeSelected(payload);
+                      handleChangeOrSetSelected(
+                        state.selected.filter(({ value }) => value !== payload.value),
+                      );
                     }
 
                     if (onceClickOption) hideOptions();
                   } else {
-                    setSelected([{ label: option.label, value: option.value }]);
+                    handleChangeOrSetSelected([payload]);
                     hideOptions();
                   }
                 },
@@ -162,10 +172,8 @@ export const useSelect = ({
     filteredOptions,
     onceClickOption,
     isMulti,
-    setSelected,
-    addSelected,
-    removeSelected,
     hideOptions,
+    handleChangeOrSetSelected,
   ]);
 
   const getInputProps = useCallback(
@@ -251,6 +259,8 @@ export const useSelect = ({
     optionsRef,
     groupOptions,
     setSelected,
+    addSelected,
+    removeSelected,
     showOptions,
     hideOptions,
     getInputProps,
