@@ -91,10 +91,10 @@ export const useSelect = ({
 
   const handleChangeOrSetSelected = useCallback(
     (selected: Array<SelectOption>) => {
-      if (isFunction(onChange)) onChange(selected);
+      if (isFunction(onChange) && isUndefined(value)) onChange(selected);
       else setSelected(selected);
     },
-    [onChange, setSelected],
+    [value, onChange, setSelected],
   );
 
   const toggleOptions = useCallback(() => {
