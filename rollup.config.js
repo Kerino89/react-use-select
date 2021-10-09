@@ -37,6 +37,7 @@ export default outputs.map((output) => ({
   plugins: [
     json(),
     external(),
+    resolve(),
     typescript({
       typescript: ts,
       tsconfig: "tsconfig.lib.json",
@@ -47,7 +48,6 @@ export default outputs.map((output) => ({
       },
       clean: true,
     }),
-    resolve(),
     sourcemaps(),
     output.format === "umd" && commonjs({ include: /\/node_modules\//, extensions }),
     output.format !== "esm" &&
