@@ -50,6 +50,7 @@ export const useSelect = ({
   const optionsRef = useRef<HTMLElement>(null);
 
   const prevValue = usePrevious(value);
+  const prevState = usePrevious(state);
 
   const isGroup = useMemo<boolean>(() => {
     if (!options?.length) return false;
@@ -91,8 +92,11 @@ export const useSelect = ({
 
   const handleChangeOrSetSelected = useCallback(
     (selected: Array<SelectOption>) => {
-      if (isFunction(onChange) && isUndefined(value)) onChange(selected);
-      else setSelected(selected);
+      if (isFunction(onChange) && isUndefined(value)) {
+        onChange(selected);
+      } else {
+        setSelected(selected);
+      }
     },
     [value, onChange, setSelected],
   );
@@ -233,12 +237,10 @@ export const useSelect = ({
   }, [isDisabled, state.isOpen, hideOptions]);
 
   useUpdateEffect(() => {
-    const newValue = Array.isArray(value) ? value : [value];
-
-    if (isFunction(onChange) && !isEqual(state.selected, newValue)) {
+    if (isFunction(onChange) && !isEqual(state.selected, prevState?.selected)) {
       onChange(isMulti ? [...state.selected] : state.selected[0]);
     }
-  }, [state.selected, onChange]);
+  }, [state.selected, prevState?.selected, onChange]);
 
   useEffect(() => {
     if (isUndefined(value) || isEqual(value, prevValue)) return void 0;

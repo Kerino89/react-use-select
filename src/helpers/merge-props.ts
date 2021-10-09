@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 export type MergeSpread<T extends ReadonlyArray<unknown>> = T extends [infer L, ...infer R]
   ? L & MergeSpread<R>
