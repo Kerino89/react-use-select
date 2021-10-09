@@ -1,4 +1,5 @@
 {
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "jest.debugMode": true
+  "jest.debugMode": true,
+  "cSpell.words": ["prebuild"]
 }
