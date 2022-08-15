@@ -252,7 +252,7 @@ export const useSelect = ({
     }
   }, [value, state.selected, prevValue, setSelected]);
 
-  useOnClickOutside(selectRef, hideOptions, { disabled: !state.isOpen });
+  useOnClickOutside(selectRef, hideOptions, { disabled: !state.isOpen, ignoreRef: optionsRef });
 
   return {
     state,

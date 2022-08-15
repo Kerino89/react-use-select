@@ -1,5 +1,9 @@
 export const isUndefined = (arg: unknown): arg is undefined => arg === undefined;
 
+export const isNull = (arg: unknown): arg is null => arg === null;
+
+export const isNil = (arg: unknown): arg is null | undefined => isUndefined(arg) || isNull(arg);
+
 export const isObject = (arg: unknown): arg is object => {
   return arg !== null && typeof arg === "object" && !Array.isArray(arg);
 };

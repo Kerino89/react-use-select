@@ -1,6 +1,6 @@
 export * from "./use-select";
 export { flatOptions, getLabels, getValues } from "./use-select.utils";
-export {
+export type {
   UseSelect,
   SelectValue,
   SelectLabel,
