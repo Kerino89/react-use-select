@@ -5,7 +5,7 @@ import type { Ref, Key, RefObject, HTMLAttributes, InputHTMLAttributes, ReactNod
 export type MergePropGetter<P extends object, U extends PropGetter<object>> = MergeSpread<
   [P, U extends ReadonlyArray<unknown> ? MergeSpread<U> : U extends (props: P) => infer T ? T : U]
 >;
-export type SelectValue = string | number;
+export type SelectValue = string | number | null;
 export type SelectLabel = string | number | ReactNode;
 export type PropGetter<P> = Partial<P> | ReadonlyArray<Partial<P>> | ((props: P) => Partial<P>);
 export type WithKeyedProps<P> = P & { key?: Key };
@@ -88,10 +88,10 @@ export interface UseSelectState {
 }
 
 export interface UseSelectProps {
-  isMulti?: boolean;
+  multiple?: boolean;
   onceClickOption?: boolean;
   isSearchable?: boolean;
-  isDisabled?: boolean;
+  disabled?: boolean;
   value?: SelectOption | Array<SelectOption>;
   options?: Array<SelectOption | SelectGroupOption>;
   onChange?: (value: SelectOption | Array<SelectOption>) => void;

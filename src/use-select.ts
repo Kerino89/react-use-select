@@ -37,10 +37,10 @@ import type {
 export const useSelect = ({
   value,
   options,
-  isMulti = false,
+  multiple = false,
   isSearchable = false,
   onceClickOption = false,
-  isDisabled = false,
+  disabled = false,
   onChange,
 }: UseSelectProps): UseSelect => {
   const [state, dispatch] = useReducer(selectReducer, INITIAL_STATE);
@@ -77,10 +77,10 @@ export const useSelect = ({
   }, []);
 
   const showOptions = useCallback(() => {
-    if (isDisabled) return void 0;
+    if (disabled) return void 0;
 
     dispatch({ type: UseSelectActionsTypes.OPEN_MENU });
-  }, [isDisabled]);
+  }, [disabled]);
 
   const hideOptions = useCallback(() => {
     dispatch({ type: UseSelectActionsTypes.CLOSE_MENU });
@@ -148,7 +148,7 @@ export const useSelect = ({
 
                   const payload = { label: option.label, value: option.value };
 
-                  if (isMulti) {
+                  if (multiple) {
                     if (!isActive) {
                       handleChangeOrSetSelected([...state.selected, payload]);
                     } else {
@@ -175,7 +175,7 @@ export const useSelect = ({
     state.selected,
     filteredOptions,
     onceClickOption,
-    isMulti,
+    multiple,
     hideOptions,
     handleChangeOrSetSelected,
   ]);
@@ -231,14 +231,14 @@ export const useSelect = ({
   useEffect(inputFocus, [inputFocus]);
 
   useEffect(() => {
-    if (isDisabled && state.isOpen) {
+    if (disabled && state.isOpen) {
       hideOptions();
     }
-  }, [isDisabled, state.isOpen, hideOptions]);
+  }, [disabled, state.isOpen, hideOptions]);
 
   useUpdateEffect(() => {
     if (isFunction(onChange) && !isEqual(state.selected, prevState?.selected)) {
-      onChange(isMulti ? [...state.selected] : state.selected[0]);
+      onChange(multiple ? [...state.selected] : state.selected[0]);
     }
   }, [state.selected, prevState?.selected, onChange]);
 
