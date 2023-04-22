@@ -3,7 +3,7 @@ import { useOnClickOutside } from "@hooks/use-on-click-outside";
 import { useUpdateEffect } from "@hooks/use-update-effect";
 import { usePrevious } from "@hooks/use-previous";
 import { isEqual } from "@helpers/is-equal";
-import { isEmpty, isUndefined, isFunction } from "@helpers/type-guards";
+import { isEmpty, isUndefined, isFunction, isNil } from "@helpers/type-guards";
 import { UseSelectActionsTypes } from "./use-select.const";
 import {
   getGroupOptions,
@@ -243,7 +243,8 @@ export const useSelect = ({
   }, [state.selected, prevState?.selected, onChange]);
 
   useEffect(() => {
-    if (isUndefined(value) || isEqual(value, prevValue)) return void 0;
+    if (isNil(value) && !isNil(prevValue)) setSelected([]);
+    if (isNil(value) || isEqual(value, prevValue)) return void 0;
 
     const newSelected = Array.isArray(value) ? value : [value];
 

@@ -92,7 +92,7 @@ export interface UseSelectProps {
   onceClickOption?: boolean;
   isSearchable?: boolean;
   disabled?: boolean;
-  value?: SelectOption | Array<SelectOption>;
+  value?: null | SelectOption | Array<SelectOption>;
   options?: Array<SelectOption | SelectGroupOption>;
   onChange?: (value: SelectOption | Array<SelectOption>) => void;
 }
