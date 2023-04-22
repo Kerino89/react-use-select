@@ -53,7 +53,7 @@ interface AddSelectedAction {
 
 interface RemoveSelectedAction {
   type: typeof UseSelectActionsTypes.REMOVE_SELECTED;
-  payload: SelectOption;
+  payload: SelectValue;
 }
 
 interface ClearSearchValueAction {
@@ -105,7 +105,7 @@ export interface UseSelect {
   groupOptions: Array<UseSelectGroupOption>;
   setSelected: (payload: Array<SelectOption>) => void;
   addSelected: (payload: SelectOption) => void;
-  removeSelected: (payload: SelectOption) => void;
+  removeSelected: (payload: SelectOption | SelectValue) => void;
   hideOptions: () => void;
   showOptions: () => void;
   toggleOptions: () => void;

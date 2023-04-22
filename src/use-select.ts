@@ -18,6 +18,7 @@ import type {
   UseSelect,
   InputProps,
   SelectProps,
+  SelectValue,
   OptionsProps,
   GroupProps,
   GroupPropGetter,
@@ -72,8 +73,11 @@ export const useSelect = ({
     dispatch({ type: UseSelectActionsTypes.ADD_SELECTED, payload });
   }, []);
 
-  const removeSelected = useCallback((payload: SelectOption) => {
-    dispatch({ type: UseSelectActionsTypes.REMOVE_SELECTED, payload });
+  const removeSelected = useCallback((payload: SelectOption | SelectValue) => {
+    dispatch({
+      type: UseSelectActionsTypes.REMOVE_SELECTED,
+      payload: (payload as SelectOption)?.value || (payload as SelectValue),
+    });
   }, []);
 
   const showOptions = useCallback(() => {

@@ -40,7 +40,7 @@ export const selectReducer = (
     case UseSelectActionsTypes.REMOVE_SELECTED:
       return {
         ...state,
-        selected: state.selected.filter(({ value }) => value !== action.payload.value),
+        selected: state.selected.filter(({ value }) => value !== action.payload),
       };
 
     case UseSelectActionsTypes.SET_SEARCH_VALUE:
