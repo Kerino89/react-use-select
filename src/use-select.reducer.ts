@@ -1,11 +1,5 @@
-import { UseSelectActionsTypes } from "./use-select.const";
+import { UseSelectActionsTypes, INITIAL_STATE } from "./use-select.const";
 import type { UseSelectState, UseSelectActionTypes } from "./use-select.interface";
-
-export const INITIAL_STATE: UseSelectState = {
-  isOpen: false,
-  searchValue: "",
-  selected: [],
-} as const;
 
 export const selectReducer = (
   state: UseSelectState = INITIAL_STATE,

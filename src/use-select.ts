@@ -4,14 +4,14 @@ import { useUpdateEffect } from "@hooks/use-update-effect";
 import { usePrevious } from "@hooks/use-previous";
 import { isEqual } from "@helpers/is-equal";
 import { isEmpty, isUndefined, isFunction, isNil } from "@helpers/type-guards";
-import { UseSelectActionsTypes } from "./use-select.const";
+import { UseSelectActionsTypes, INITIAL_STATE } from "./use-select.const";
 import {
   getGroupOptions,
   filterOptions,
   filterGroupOptions,
   makePropGetter,
 } from "./use-select.utils";
-import { selectReducer, INITIAL_STATE } from "./use-select.reducer";
+import { selectReducer } from "./use-select.reducer";
 
 import type { RefObject, ChangeEvent } from "react";
 import type {
