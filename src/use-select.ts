@@ -44,7 +44,10 @@ export const useSelect = ({
   disabled = false,
   onChange,
 }: UseSelectProps): UseSelect => {
-  const [state, dispatch] = useReducer(selectReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(selectReducer, {
+    ...INITIAL_STATE,
+    selected: isNil(value) ? [] : Array.isArray(value) ? value : [value],
+  });
 
   const inputRef = useRef<HTMLInputElement>(null);
   const selectRef = useRef<HTMLElement>(null);
