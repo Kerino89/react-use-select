@@ -12,6 +12,7 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/react-use-select.esm.js",
       "require": "./dist/react-use-select.cjs.js"
     }
